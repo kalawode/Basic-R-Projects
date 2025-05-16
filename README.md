@@ -1,5 +1,5 @@
 # R-Projects
-R scripts for data analysis
+R script for data analysis project
 
 This project showcases the use of R and RStudio to visualise complex experimental data, highlighting the swimming durations of tadpoles under varying experimental conditions.
 
