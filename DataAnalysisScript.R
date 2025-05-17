@@ -4,34 +4,7 @@ head(tp)
 summary(tp)
 str(tp)
 
-boxplot(log(time+1)~experiment, data = tp)
-stripchart(log(time+1)~experiment, data = tp, method = "jitter", vertical = TRUE, pch = 21, col = "maroon", bg = "bisque", add = TRUE)
-
-log(tp$time)
-
-#Analyze the data using mixed effects model:
-library(lme4)
-library(lmerTest)
-
-tp.lmer <- lmer(log(time+1)~experiment + (1|tadpole), data = tp)
-plot(tp.lmer)
-hist(residuals(tp.lmer))
-
-summary(tp.lmer)
-
-library(emmeans)
-#Calculate mean values per treatment:
-tp.emmeans <- emmeans(tp.lmer, "experiment")
-tp.emmeans
-#Perform Tukey test to compare means among treatments:
-pairs(tp.emmeans)
-# NMDA > Control
-#Control == Spinalized
-#NMDA >  spinalized
-
-########################################
-
-#METHOD 2:  Summarize the data and use 1-way ANOVA:
+Summarize the data and use 1-way ANOVA:
 library(doBy)
 
 #Summarizing the data:
