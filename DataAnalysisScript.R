@@ -4,15 +4,15 @@ head(tp)
 summary(tp)
 str(tp)
 
-Summarise the data and use 1-way ANOVA:
+#Summarise the data and use 1-way ANOVA:
 library(doBy)
 
-Summarising the data:
+#Summarising the data:
 summary.raw <- summaryBy(time ~ experiment + tadpole, data = tp, FUN = c(mean))
 
 summary.raw
 
-Running model:
+#Running model:
 tp.summary.raw <- lm(time.mean ~ experiment, data = summary.raw)
 #Checking assumptions
 plot(tp.summary.raw)
@@ -21,22 +21,22 @@ anova(tp.summary.raw)
 #Suggests an effect
 
 library(emmeans)
-Calculating treatment means:
+#Calculating treatment means:
 tp.summary.raw.emmeans <- emmeans(tp.summary.raw, "experiment")
-Conduct Tukey test:
+#Conduct Tukey test:
 pairs(tp.summary.raw.emmeans)
 
 #NMDA > Control
 #Control == Spinalized
 #NMDA >  spinalized
 
-Repeating the analysis using log-tramsformed means:
+#Repeating the analysis using log-tramsformed means:
 tp.summary.raw.log <- lm(log(time.mean) ~ experiment, data = summary.raw)
 plot(tp.summary.raw.log)
 anova(tp.summary.raw.log)
 
 
-Taking the log before finding the mean:
+#Taking the log before finding the mean:
 summary.log <- summaryBy(log(time+1) ~ experiment + tadpole, data = tp, FUN = c(mean))
 summary.log
 names(summary.log) <- c("experiment", "tadpole","mean.of.log.time")
